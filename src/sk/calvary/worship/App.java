@@ -64,7 +64,7 @@ import sk.calvary.worship.panels.SongsPanel;
  */
 public class App extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 5202531162861036082L;
-	
+
 	public final Action actionGo;
 	public final Action actionReverseGo;
 	public final Action actionGoText;
@@ -75,7 +75,7 @@ public class App extends JFrame implements ActionListener {
 	public final int SETTING_LANGUAGE = 1;
 	public final int SETTING_ASPECT_RATIO = 2;
 	public final int SETTING_TRANSITION = 3;
-	
+
 	public static ImageLoader imageLoader = new ImageLoader();
 
 	public static Thumbnails thumbnails = new Thumbnails(imageLoader, 60, 45);
@@ -94,7 +94,7 @@ public class App extends JFrame implements ActionListener {
 
 	private Lang langObj = null;
 	public String language = null;
-	
+
 	/**
 	 * This method initializes jJMenuBar
 	 * 
@@ -139,7 +139,8 @@ public class App extends JFrame implements ActionListener {
 			jMenuItemScreenProjector.setText(ls(1007));
 			jMenuItemScreenProjector
 					.addActionListener(new java.awt.event.ActionListener() {
-						public void actionPerformed(java.awt.event.ActionEvent e) {
+						public void actionPerformed(
+								java.awt.event.ActionEvent e) {
 							initializeProjector();
 						}
 					});
@@ -158,7 +159,8 @@ public class App extends JFrame implements ActionListener {
 			jMenuItemScreenThis.setText(ls(1008));
 			jMenuItemScreenThis
 					.addActionListener(new java.awt.event.ActionListener() {
-						public void actionPerformed(java.awt.event.ActionEvent e) {
+						public void actionPerformed(
+								java.awt.event.ActionEvent e) {
 							showOnThisScreen();
 						}
 					});
@@ -178,7 +180,8 @@ public class App extends JFrame implements ActionListener {
 			// jMenuItemScreenTest.setVisible(testMode);
 			jMenuItemScreenTest
 					.addActionListener(new java.awt.event.ActionListener() {
-						public void actionPerformed(java.awt.event.ActionEvent e) {
+						public void actionPerformed(
+								java.awt.event.ActionEvent e) {
 							initializeFullScreen(SCREEN_TESTSCREEN);
 						}
 					});
@@ -197,7 +200,8 @@ public class App extends JFrame implements ActionListener {
 			jMenuItemScreenCancelAll.setText(ls(1010));
 			jMenuItemScreenCancelAll
 					.addActionListener(new java.awt.event.ActionListener() {
-						public void actionPerformed(java.awt.event.ActionEvent e) {
+						public void actionPerformed(
+								java.awt.event.ActionEvent e) {
 							for (int i = 0; i < liveScreens.length; i++) {
 								if (i == SCREEN_PREVIEW)
 									continue;
@@ -243,7 +247,6 @@ public class App extends JFrame implements ActionListener {
 		return jMenuFile;
 	}
 
-
 	private PanelSelector getPanelSelector() {
 		if (panelSelector == null) {
 			panelSelector = new PanelSelector(this);
@@ -251,16 +254,16 @@ public class App extends JFrame implements ActionListener {
 		return panelSelector;
 	}
 
-	public static void main(String[] args) throws InvocationTargetException,
-			InterruptedException {
+	public static void main(String[] args)
+			throws InvocationTargetException, InterruptedException {
 		if (args.length > 0 && args[0].equals("-testmode"))
 			testMode = true;
 		SwingUtilities.invokeAndWait(new Runnable() {
 			@Override
 			public void run() {
 				try {
-					UIManager.setLookAndFeel(UIManager
-							.getSystemLookAndFeelClassName());
+					UIManager.setLookAndFeel(
+							UIManager.getSystemLookAndFeelClassName());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -329,9 +332,9 @@ public class App extends JFrame implements ActionListener {
 	ObjectListModel pictureBookmarksListLM = new ObjectListModel();
 
 	PictureBookmarksList pictureHistoryList = new PictureBookmarksList(this);
-	
+
 	ObjectListModel pictureHistoryListLM = new ObjectListModel();
-	
+
 	public HashMap<Integer, String> generalSettings = new HashMap<Integer, String>(); 
 	
 	private JMenuBar jJMenuBar = null;
@@ -382,7 +385,8 @@ public class App extends JFrame implements ActionListener {
 				go(Screen.ALL);
 			}
 		};
-		actionReverseGo = new MyAction(ls(1001), null, KeyStroke.getKeyStroke("shift F5")) {
+		actionReverseGo = new MyAction(ls(1001), null,
+				KeyStroke.getKeyStroke("shift F5")) {
 			private static final long serialVersionUID = -3635843279198182926L;
 
 			public void actionPerformed(ActionEvent e) {
@@ -406,7 +410,8 @@ public class App extends JFrame implements ActionListener {
 			}
 
 		};
-		actionSongSearch = new MyAction(ls(1004), null, KeyStroke.getKeyStroke("ctrl F")) {
+		actionSongSearch = new MyAction(ls(1004), null,
+				KeyStroke.getKeyStroke("ctrl F")) {
 			private static final long serialVersionUID = -6286284389819879458L;
 
 			public void actionPerformed(ActionEvent e) {
@@ -420,14 +425,15 @@ public class App extends JFrame implements ActionListener {
 				});
 			}
 		};
-		actionSaveAll = new MyAction(ls(1005), null, KeyStroke.getKeyStroke("ctrl S")) {
+		actionSaveAll = new MyAction(ls(1005), null,
+				KeyStroke.getKeyStroke("ctrl S")) {
 			private static final long serialVersionUID = 2857605349748326463L;
 
 			public void actionPerformed(ActionEvent e) {
 				saveAll();
 			}
 		};
-		
+
 		pictureBookmarksChanged();
 		pictureHistoryChanged();
 		
@@ -452,7 +458,7 @@ public class App extends JFrame implements ActionListener {
 
 		setCurrentTransition(transitions.elementAt(Integer.valueOf(generalSettings.get(SETTING_TRANSITION))));
 	}
-	
+
 	private void checkDirs() {
 		try {
 			ArrayList<File> dirs = new ArrayList<File>();
@@ -473,7 +479,8 @@ public class App extends JFrame implements ActionListener {
 			if (!badDirs.isEmpty()) {
 				if (JOptionPane.showConfirmDialog(null,
 						"Some required directories are missing. Do you want to create them?\n\n"
-								+ badDirsS.toString(), "jWorship " + version,
+								+ badDirsS.toString(),
+						"jWorship " + version,
 						JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION)
 					throw new IllegalStateException();
 				for (File d : dirs) {
@@ -487,38 +494,37 @@ public class App extends JFrame implements ActionListener {
 			throw new InternalError();
 		}
 	}
-	
+
 	private void loadLangs() {
 		File file = new File(dirSettings, "lang.lng");
-		
+
 		try {
 			langObj = Lang.parse(new FileInputStream(file));
-		}
-		catch(FileNotFoundException e){
-			if (JOptionPane.showConfirmDialog(null, 
+		} catch (FileNotFoundException e) {
+			if (JOptionPane.showConfirmDialog(null,
 					"Language file is missing.. Would you like to use default one?",
 					"jWorship " + version,
 					JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION)
 				throw new IllegalStateException("No language file found.");
-			
+
 			try {
 				Lang.copyDefaultLangFile(file);
-				//lang = Lang.parse(new FileInputStream(file));
+				// lang = Lang.parse(new FileInputStream(file));
+			} catch (Exception ee) {
+				throw new IllegalStateException(
+						"An error occured during copying language.", ee);
 			}
-			catch (Exception ee) {
-				throw new IllegalStateException("An error occured during copying language.", ee);
-			}
-		}
-		catch (IOException eee) {
-			throw new IllegalStateException("An error occured during loading language.", eee);
+		} catch (IOException eee) {
+			throw new IllegalStateException(
+					"An error occured during loading language.", eee);
 		}
 	}
-	
-	public String ls(int key){
+
+	public String ls(int key) {
 		return langObj.getString("#" + key, language);
 	}
-	
-	public String[] getLanguagesAvailable(){
+
+	public String[] getLanguagesAvailable() {
 		return langObj.getLangs();
 	}
 
@@ -628,7 +634,8 @@ public class App extends JFrame implements ActionListener {
 			gridBagConstraints3.gridy = 1;
 			gridBagConstraints3.fill = java.awt.GridBagConstraints.BOTH;
 			gridBagConstraints3.weightx = 1.0D;
-			jPanel.add((Component) getScreenViewPrepared(), gridBagConstraints1);
+			jPanel.add((Component) getScreenViewPrepared(),
+					gridBagConstraints1);
 			jPanel.add((Component) getScreenViewLive(), gridBagConstraints2);
 			jPanel.add(getJPanel2(), gridBagConstraints3);
 		}
@@ -681,7 +688,6 @@ public class App extends JFrame implements ActionListener {
 		return jSplitPane;
 	}
 
-
 	private ScreenViewSwing getScreenViewLive() {
 		if (screenViewLive == null) {
 			screenViewLive = new ScreenViewSwing();
@@ -694,15 +700,14 @@ public class App extends JFrame implements ActionListener {
 		return screenViewLive;
 	}
 
-
 	private ScreenViewSwing getScreenViewPrepared() {
 		if (screenViewPrepared == null) {
 			screenViewPrepared = new ScreenViewSwing();
 			screenViewPrepared.setName("screenViewPrepared");
 			screenViewPrepared.setScreen(screenPrepared);
-			if (screenViewPrepared instanceof ScreenViewSwing)
-				((ScreenViewSwing) screenViewPrepared).refresher
-						.setMaxFrameRate(4);
+			// if (screenViewPrepared instanceof ScreenViewSwing)
+			// ((ScreenViewSwing) screenViewPrepared).refresher
+			// .setMaxFrameRate(4);
 		}
 		return screenViewPrepared;
 	}
@@ -753,8 +758,8 @@ public class App extends JFrame implements ActionListener {
 		if (liveScreens[SCREEN_PREVIEW] instanceof ScreenViewSwing) {
 			((ScreenViewSwing) liveScreens[SCREEN_PREVIEW])
 					.setDisableTransitions(isFullScreen);
-			((ScreenViewSwing) liveScreens[SCREEN_PREVIEW]).refresher
-					.setMaxFrameRate(isFullScreen ? 4 : 0);
+			// ((ScreenViewSwing) liveScreens[SCREEN_PREVIEW]).refresher
+			// .setMaxFrameRate(isFullScreen ? 4 : 0);
 		}
 
 		for (int i = 0; i < liveScreens.length; i++) {
@@ -802,12 +807,15 @@ public class App extends JFrame implements ActionListener {
 	protected void saveAll() {
 		dirSettings.mkdir();
 		try {
-			SafeFileOutputStream.safeSave(new File(dirSettings,
-					"picturebookmarks.ser"), pictureBookmarksList);
-			SafeFileOutputStream.safeSave(new File(dirSettings,
-					"picturehistory.ser"), pictureHistoryList);
-			SafeFileOutputStream.safeSave(new File(dirSettings,
-					"generalSettings.ser"), generalSettings);
+			SafeFileOutputStream.safeSave(
+					new File(dirSettings, "picturebookmarks.ser"),
+					pictureBookmarksList);
+			SafeFileOutputStream.safeSave(
+					new File(dirSettings, "picturehistory.ser"),
+					pictureHistoryList);
+			SafeFileOutputStream.safeSave(
+					new File(dirSettings, "generalSettings.ser"),
+					generalSettings);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -835,7 +843,7 @@ public class App extends JFrame implements ActionListener {
 			pictureBookmarksList.updateOwnership();
 			pictureHistoryList.app = this;
 			pictureHistoryList.updateOwnership();
-			
+
 			language = generalSettings.get(SETTING_LANGUAGE);
 		}
 	}
@@ -974,31 +982,32 @@ public class App extends JFrame implements ActionListener {
 		firePropertyChange("currentTransition", old, this.currentTransition);
 	}
 
-	public void setCurrentLanguage(int language){
+	public void setCurrentLanguage(int language) {
 		String value = langObj.getLangs()[language];
-		
-		if (!value.equals(this.language)){
+
+		if (!value.equals(this.language)) {
 			firePropertyChange("language", value, this.language);
-			
+
 			this.language = value;
 			generalSettings.put(SETTING_LANGUAGE, this.language);
-			
+
 			if (JOptionPane.showConfirmDialog(this,
-					"The changes will appear after save and restart. Would You like to do it now?", "jWorship " + version,
+					"The changes will appear after save and restart. Would You like to do it now?",
+					"jWorship " + version,
 					JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 				restart();
 			}
 		}
 	}
-	
-	public void restart(){
+
+	public void restart() {
 		saveAll();
-		
+
 		this.dispose();
-		
+
 		new App().setVisible(true);
 	}
-	
+
 	/**
 	 * @param selectedSong
 	 *            The selectedSong to set.
@@ -1132,7 +1141,8 @@ public class App extends JFrame implements ActionListener {
 		return pictureBookmarksListLM;
 	}
 
-	public void setPictureBookmarksListLM(ObjectListModel pictureBookmarksListLM) {
+	public void setPictureBookmarksListLM(
+			ObjectListModel pictureBookmarksListLM) {
 		this.pictureBookmarksListLM = pictureBookmarksListLM;
 		pictureHistoryChanged();
 	}
